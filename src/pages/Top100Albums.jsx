@@ -33,10 +33,11 @@ function AlbumsPage() {
 
   return (
     <>
-      <h1>Top 100 Albums</h1>
-      {albums.map((album) => (
+      <h1 className="text-center">iTunes Top 100 Albums</h1>
+      {albums.map((album, index) => (
         <AlbumCard
           key={album.id}
+          position={index + 1}
           albumId={album.id}
           album={album.name}
           artist={album.artistName}

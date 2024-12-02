@@ -2,40 +2,51 @@ import { Link } from "react-router-dom";
 
 function Nav() {
   return (
-    <header className="m-2 sticky top-2">
-      <nav className="navbar bg-base-300 shadow-md rounded-full nav">
-        <div className="flex-1">
+    <header className="sticky top-0">
+      <nav className="navbar bg-base-300 shadow-md nav">
+        <div className="dropdown flex-1">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <a>Albums</a>
+            </li>
+            <li>
+              <a>Profile</a>
+            </li>
+          </ul>
+        </div>
+        <div className="flex justify-center items-center">
           <Link
             className="btn btn-ghost rounded-full text-xl"
             id="nav-heading"
             to="/"
           >
-            Music
+            iTunesify
           </Link>
         </div>
-        <div className="flex-none">
-          {/* <ul className="menu menu-horizontal px-1">
-            <li>
-              <details>
-                <summary className="rounded-full">Topics</summary>
-                <ul className="bg-base-100 p-2">
-                  <li>
-                    <Link to={"/"}>All</Link>
-                  </li>
-                  <li>
-                    <Link to="/topics/football">Football</Link>
-                  </li>
-                  <li>
-                    <Link to="/topics/cooking">Cooking</Link>
-                  </li>
-                  <li>
-                    <Link to="/topics/coding">Coding</Link>
-                  </li>
-                </ul>
-              </details>
-            </li>
-          </ul> */}
-
+        <div className="flex flex-1 items-center justify-end">
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
@@ -68,4 +79,4 @@ function Nav() {
   );
 }
 
-export default Nav
+export default Nav;
