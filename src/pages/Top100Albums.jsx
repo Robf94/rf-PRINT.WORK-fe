@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { fetchTop100Albums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
+import Loader from "../components/Loader";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   // const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchTop100Albums()
       .then(({ data }) => {
         const albums = data.albums;
         console.log(albums, "<<< albumsData");
         setAlbums(albums);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err, "<<< error");
@@ -23,9 +27,9 @@ function AlbumsPage() {
   //   return <ErrorPage />
   // }
 
-  // if (isLoading) {
-  //   return <Loader />
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
