@@ -10,7 +10,7 @@ function AlbumsPage() {
     fetchTop100Albums()
       .then(({ data }) => {
         const albums = data.albums;
-        // console.log(albums, "<<< albumsData");
+        console.log(albums, "<<< albumsData");
         setAlbums(albums);
       })
       .catch((err) => {
@@ -36,6 +36,7 @@ function AlbumsPage() {
           albumId={album.id}
           album={album.name}
           artist={album.artistName}
+          artwork={album.artworkUrl100}
         />
       ))}
     </>
