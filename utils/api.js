@@ -19,12 +19,5 @@ const api = axios.create({
 // }
 
 export function fetchTop100Albums() {
-  return api
-    .get(`/albums`)
-    .then(({ data }) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log("Error fetching albums");
-    });
+  return api.get("/albums");
 }
