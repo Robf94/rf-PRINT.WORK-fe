@@ -1,3 +1,4 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { fetchTop100Albums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
@@ -9,14 +10,29 @@ function AlbumsPage() {
   const [isLoading, setIsLoading] = useState(true);
   // const [isError, setIsError] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(false);
+
+  // useInfiniteQuery({
+  //   queryKey: ["albums"],
+  //   queryFn: fetchTop100Albums,
+  //   initialPageParam: 1,
+  //   getNextPageParam: (lastPage, allPages) => {
+  //     if (allPages.length < 10) {
+  //       return allPages.length + 1;
+  //     } else {
+  //       return undefined;
+  //     }
+  //   },
+  // });
 
   useEffect(() => {
     setIsLoading(true);
     fetchTop100Albums()
-      .then(({ data }) => {
-        const albums = data.albums;
-        console.log(albums, "<<< albumsData");
-        setAlbums(albums);
+      .then((response) => {
+        console.log(response, "response");
+        // const albums = data.albums;
+        // console.log(albums, "<<< albumsData");
+        // setAlbums(albums);
         setIsLoading(false);
       })
       .catch((err) => {
