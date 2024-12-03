@@ -8,7 +8,7 @@ import SearchBar from "../components/SearchBar";
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [hasNextPage, setHasNextPage] = useState(false);
 
@@ -27,17 +27,17 @@ function AlbumsPage() {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsError(false);
     fetchTop100Albums()
-      .then((response) => {
-        console.log(response, "response");
-        // const albums = data.albums;
-        // console.log(albums, "<<< albumsData");
-        // setAlbums(albums);
+      .then(({ data }) => {
+        const albums = data.albums;
+        console.log(albums, "<<< albumsData");
+        setAlbums(albums);
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsError(true);
         console.log(err, "<<< error");
-        // setIsError(true)
       });
   }, []);
 
