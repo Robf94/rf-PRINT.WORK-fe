@@ -43,7 +43,7 @@ function Nav() {
             id="nav-heading"
             to="/"
           >
-            iTunesify
+            Nav
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end">

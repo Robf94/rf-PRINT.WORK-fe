@@ -2,6 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://rf-print-work-be.onrender.com/api",
+  timeout: 30000
 });
 
 // export function fetchTop100Albums(pageParam = 1, limit = 10) {
@@ -20,4 +21,10 @@ const api = axios.create({
 
 export function fetchTop100Albums() {
   return api.get("/albums");
+}
+
+export function fetchAlbumById(id) {
+  return api.get(`/albums/${id}`).then(({ data }) => {
+    return data;
+  });
 }
