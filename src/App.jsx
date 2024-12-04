@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import AlbumsPage from "./pages/Top100Albums";
 import AlbumDetail from "./pages/AlbumDetail";
 import Nav from "./components/Nav";
+import Coverflow from "./components/Coverflow";
 
 function App() {
   return (
