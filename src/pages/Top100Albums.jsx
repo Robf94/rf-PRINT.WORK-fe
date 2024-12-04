@@ -65,7 +65,7 @@ function AlbumsPage() {
 
   return (
     <>
-      <div className="album-search-container py-5">
+      <div className="album-search-container bg-primary py-5">
         <h1 className="text-h1 text-center text-white">iTunes Top 100 Albums</h1>
         <h2 className="text-h2 text-center text-white">Updated daily</h2>
         <SearchBar
@@ -73,20 +73,22 @@ function AlbumsPage() {
           setSearchInput={setSearchInput}
         />
       </div>
-      {filteredAlbums.length === 0 ? (
-        <p className="text-center">No albums found!</p>
-      ) : (
-        filteredAlbums.map((album, index) => (
-          <AlbumCard
-            key={album.id}
-            position={index + 1}
-            albumId={album.id}
-            album={album.name}
-            artist={album.artistName}
-            artwork={album.artworkUrl100}
-          />
-        ))
-      )}
+      <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
+        {filteredAlbums.length === 0 ? (
+          <p className="text-center">No albums found!</p>
+        ) : (
+          filteredAlbums.map((album, index) => (
+            <AlbumCard
+              key={album.id}
+              position={index + 1}
+              albumId={album.id}
+              album={album.name}
+              artist={album.artistName}
+              artwork={album.artworkUrl100}
+            />
+          ))
+        )}
+      </div>
     </>
   );
 }
