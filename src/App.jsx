@@ -5,7 +5,7 @@ import AlbumsPage from "./pages/Top100Albums";
 import AlbumDetail from "./pages/AlbumDetail";
 import Nav from "./components/Nav";
 import Coverflow from "./components/Coverflow";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "../utils/ScrollToTop";
 
 // const queryClient = new QueryClient();
 

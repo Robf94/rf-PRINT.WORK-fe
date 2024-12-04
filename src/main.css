@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #1a352b; 
+  --primary-color: #1a352b;
 }
 
 .nav {
@@ -18,11 +18,16 @@ body {
   background: var(--primary-color);
 }
 
-.album-search-container, .album-card-digit {
+.album-search-container,
+.album-card-digit {
   background-color: var(--primary-color);
 }
 
 .mySwiper {
   padding-top: 0 !important;
   margin: 2rem auto;
+}
+
+.card {
+  position: static;
 }
