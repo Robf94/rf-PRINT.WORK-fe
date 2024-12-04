@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-import "../styles.css";
+import "../coverflow-styling.css";
 
 import { EffectCoverflow, Pagination } from "swiper/modules";
 

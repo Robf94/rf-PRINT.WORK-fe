@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #1a352b; 
+}
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.album-search-container {
+  background-color: var(--primary-color);
+}
+
+.album-card-digit {
+  background-color: var(--primary-color);
+}
