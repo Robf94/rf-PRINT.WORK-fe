@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <header className="sticky top-0">
-      <nav className="navbar bg-base-300 shadow-md nav">
+      <nav className="navbar bg-neutral shadow-md nav">
         <div className="dropdown flex-1">
           <div
             tabIndex={0}

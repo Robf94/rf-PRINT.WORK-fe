@@ -51,6 +51,7 @@ function Coverflow() {
 
   return (
     <>
+      {/* Change background colour */}
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

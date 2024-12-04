@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 import { fetchAlbumById } from "../../utils/api";
 import Loader from "../components/Loader";
 import getLargerArtwork from "../../utils/getLargerArtwork";
+import ExternalButton from "../components/ExternalLinkButton";
 
 function AlbumDetail() {
   const [album, setAlbum] = useState({});
@@ -45,17 +46,26 @@ function AlbumDetail() {
         alt={`Album artwork for ${album.name}`}
         className="w-sm-full"
       />
-      <section className="m-2 album-detail">
-        <h1 className="text-h1">{album.name}</h1>
+      <section className="m-2 p-3 card bg-neutral shadow-xl overflow-hidden">
+        <h1 className="text-h1 font-bold">{album.name}</h1>
         <h2 className="text-h2">{album.artistName}</h2>
-        <h3>Released: {dateFormat(album.releaseDate, "mmmm d, yyyy")}</h3>
-        <a href={album.artistUrl}>View Artist on Apple Music</a>
-        <a href={album.url}>View Album on Apple Music</a>
+        <p className="mb-5">Released: {dateFormat(album.releaseDate, "mmmm d, yyyy")}</p>
+        <div className="btn-container flex gap-2 mb-5 justify-between">
+          {album.artistName !== "Various Artists" ? (
+            <ExternalButton
+              url={album.artistUrl}
+              btnText={"View Artist on Apple Music"}
+            />
+          ) : undefined}
+
+          <ExternalButton
+            url={album.url}
+            btnText={"View Album on Apple Music"}
+          />
+        </div>
         <div className="genres">
           <h3 className="text-h3">Genres:</h3>
-          {album.genres.map((genre) => (
-            <h1>{genre.name}</h1>
-          ))}
+          {album.genres.map((genre) => (genre.name !== "Music" ? <span className="badge-success rounded p-1">{genre.name}</span> : ""))}
         </div>
       </section>
     </>

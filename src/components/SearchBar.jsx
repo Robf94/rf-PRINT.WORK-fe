@@ -12,7 +12,7 @@ function SearchBar(props) {
       <input
         type="text"
         className="grow"
-        placeholder="Search for Album or Artist"
+        placeholder="Search for an Album or Artist"
         onChange={handleChange}
         value={searchInput}
       />

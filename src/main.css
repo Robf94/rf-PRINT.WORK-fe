@@ -2,32 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-color: #1a352b;
-}
-
-.nav {
-  z-index: 999;
-}
-
 body {
   font-family: "Bricolage Grotesque", sans-serif;
 }
 
-.swiper-pagination-bullet-active {
-  background: var(--primary-color);
-}
-
-.album-search-container,
-.album-card-digit {
-  background-color: var(--primary-color);
+header {
+  z-index: 999;
 }
 
 .mySwiper {
   padding-top: 0 !important;
-  margin: 2rem auto;
+  margin: 1em auto;
 }
 
-.card {
+/* .card {
   position: static;
-}
+} */
