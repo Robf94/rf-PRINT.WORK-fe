@@ -26,6 +26,7 @@ function AlbumDetail() {
           ...album,
           artworkUrl100: getLargerArtwork(album.artworkUrl100),
         };
+        console.log(modifiedAlbum);
         setAlbum(modifiedAlbum);
         setIsLoading(false);
       })
@@ -38,18 +39,30 @@ function AlbumDetail() {
     return <Loader />;
   }
 
+  album.genres.map((genre) => {
+    console.log(genre.name);
+  });
+
   return (
     <>
       <img
         src={album.artworkUrl100}
-        alt=""
+        alt={`Album artwork for ${album.name}`}
         className="w-sm-full"
       />
-      <div className="prose">
-        <h1>{album.name}</h1>
-        <h2>{album.artistName}</h2>
+      <section className="m-2 album-detail">
+        <h1 className="text-h1">{album.name}</h1>
+        <h2 className="text-h2">{album.artistName}</h2>
         <h3>Released: {dateFormat(album.releaseDate, "mmmm d, yyyy")}</h3>
-      </div>
+        <a href={album.artistUrl}>View Artist on Apple Music</a>
+        <a href={album.url}>View Album on Apple Music</a>
+        <div className="genres">
+          <h3 className="text-h3">Genres:</h3>
+          {album.genres.map((genre) => (
+            <h1>{genre.name}</h1>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

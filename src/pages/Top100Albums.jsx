@@ -4,6 +4,7 @@ import { fetchTop100Albums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import Loader from "../components/Loader";
 import SearchBar from "../components/SearchBar";
+import normaliseString from "../../utils/normaliseString";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
@@ -33,6 +34,9 @@ function AlbumsPage() {
         const albums = data.albums;
         console.log(albums, "<<< albumsData");
         setAlbums(albums);
+        // setIsLoading(false);
+      })
+      .then(() => {
         setIsLoading(false);
       })
       .catch((err) => {
@@ -57,22 +61,25 @@ function AlbumsPage() {
     const lowerCaseInput = searchInput.toLowerCase();
 
     return (
-      album.name.toLowerCase().includes(lowerCaseInput) ||
-      album.artistName.toLowerCase().includes(lowerCaseInput)
+      normaliseString(album.name).includes(lowerCaseInput) ||
+      normaliseString(album.artistName).includes(lowerCaseInput)
     );
   });
 
   return (
     <>
-      <SearchBar
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-      />
-      <h1 className="text-center">iTunes Top 100 Albums</h1>
+      <div className="album-search-container py-5">
+        <h1 className="text-h1 text-center text-white">iTunes Top 100 Albums</h1>
+        <h2 className="text-h2 text-center text-white">Updated daily</h2>
+        <SearchBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
+      </div>
       {filteredAlbums.length === 0 ? (
-        <p>No albums found!</p>
+        <p className="text-center">No albums found!</p>
       ) : (
-        albums.map((album, index) => (
+        filteredAlbums.map((album, index) => (
           <AlbumCard
             key={album.id}
             position={index + 1}
