@@ -3,21 +3,17 @@ import { useParams } from "react-router-dom";
 import dateFormat from "dateformat";
 import { fetchAlbumById } from "../../utils/api";
 import Loader from "../components/Loader";
+import getLargerArtwork from "../../utils/getLargerArtwork";
 
 function AlbumDetail() {
   const [album, setAlbum] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [largeArtwork, setLargeArtwork] = useState(album.artworkUrl100);
   const { id } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-
-    const getLargerArtwork = (artworkUrl100) => {
-      return artworkUrl100.replace("100x100", "600x600");
-    };
 
     fetchAlbumById(id)
       .then((data) => {
@@ -26,7 +22,6 @@ function AlbumDetail() {
           ...album,
           artworkUrl100: getLargerArtwork(album.artworkUrl100),
         };
-        console.log(modifiedAlbum);
         setAlbum(modifiedAlbum);
         setIsLoading(false);
       })

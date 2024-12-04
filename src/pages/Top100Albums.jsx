@@ -34,9 +34,6 @@ function AlbumsPage() {
         const albums = data.albums;
         console.log(albums, "<<< albumsData");
         setAlbums(albums);
-        // setIsLoading(false);
-      })
-      .then(() => {
         setIsLoading(false);
       })
       .catch((err) => {
