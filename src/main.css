@@ -9,12 +9,3 @@ body {
 header {
   z-index: 999;
 }
-
-.mySwiper {
-  padding-top: 0 !important;
-  margin: 1em auto;
-}
-
-/* .card {
-  position: static;
-} */

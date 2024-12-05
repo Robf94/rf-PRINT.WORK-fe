@@ -49,36 +49,36 @@ function Coverflow() {
     return <Loader />;
   }
 
+  /* Change background colour */
   return (
-    <>
-      {/* Change background colour */}
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        mousewheel={{
-          enabled: true,
-          sensitivity: 4,
-        }}
-        modules={[EffectCoverflow, Mousewheel]}
-        className="mySwiper"
-      >
-        {albums.map((album) => (
-          <SwiperSlide key={album.id}>
+    <Swiper
+      effect={"coverflow"}
+      grabCursor={true}
+      centeredSlides={true}
+      slidesPerView={"auto"}
+      coverflowEffect={{
+        rotate: 35,
+        stretch: 0,
+        depth: 50,
+        modifier: 1,
+        slideShadows: true,
+      }}
+      mousewheel={{
+        enabled: true,
+        sensitivity: 4,
+      }}
+      modules={[EffectCoverflow, Mousewheel]}
+      className="mySwiper"
+    >
+      {albums.map((album) => (
+        <SwiperSlide key={album.id}>
+          <div className="flex flex-col items-center h-full">
             <img src={album.artworkUrl100} />
             <p className="text-center">{album.name}</p>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
 
