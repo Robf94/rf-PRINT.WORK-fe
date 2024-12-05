@@ -5,6 +5,7 @@ import Coverflow from "../components/Coverflow";
 import { useUser } from "../context/UserContext";
 import { fetchTop10Albums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
+import greeting from "../../utils/greeting";
 
 function Home() {
   const [albums, setAlbums] = useState([]);
@@ -33,7 +34,7 @@ function Home() {
   return (
     <>
       <div className="text-wrapper mx-2">
-        <h1 className="text-h1">Welcome back, {user.name}!</h1>
+        <h1 className="text-h1">{greeting()}, {user.name}!</h1>
         <p>Browse your favourite albums:</p>
       </div>
         <Coverflow />
