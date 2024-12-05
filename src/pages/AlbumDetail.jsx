@@ -40,6 +40,10 @@ function AlbumDetail() {
     return <Loader />;
   }
 
+  // if (isError) {
+  //   return <ErrorPage />
+  // }
+
   return (
     <>
       <img

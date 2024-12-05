@@ -14,17 +14,22 @@ function AlbumsPage() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    if (searchInput.trim() === "") {
+      setAlbums([]);
+      setPage(1);
+      setHasMore(true);
+    }
+  }, [searchInput]);
+
+  useEffect(() => {
     const fetchAlbumData = () => {
       setIsLoading(true);
       setIsError(false);
       fetchAlbums(page, 10)
-        .then(({data}) => {
+        .then(({ data }) => {
           if (data && data.albums) {
             setAlbums((prevAlbums) => [...prevAlbums, ...data.albums]);
-            if (
-              data.albums.length < 10 ||
-              albums.length + data.albums.length >= 100
-            ) {
+            if (data.albums.length < 10 || albums.length + data.albums.length >= 100) {
               setHasMore(false);
             }
           }
@@ -36,7 +41,7 @@ function AlbumsPage() {
     };
 
     fetchAlbumData();
-  }, [page]);
+  }, [page, searchInput]);
 
   const filteredAlbums = albums.filter((album) => {
     if (searchInput.trim() === "") {
@@ -68,6 +73,7 @@ function AlbumsPage() {
         <SearchBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
+          setAlbums={setAlbums}
         />
       </div>
       <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
@@ -82,7 +88,7 @@ function AlbumsPage() {
           />
         ))}
       </div>
-      {hasMore && (
+      {hasMore && searchInput.length === 0 && (
         <div className="text-center my-2">
           <LoadMoreButton
             onClick={loadMore}

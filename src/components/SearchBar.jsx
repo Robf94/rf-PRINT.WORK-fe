@@ -1,10 +1,23 @@
+import { fetchAllAlbums } from "../../utils/api";
+
 function SearchBar(props) {
-  const { searchInput, setSearchInput } = props;
+  const { searchInput, setSearchInput, setAlbums } = props;
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    setSearchInput(e.target.value);
+    const searchQuery = e.target.value;
+    setSearchInput(searchQuery)
+
+    if (searchQuery.length > 0) {
+      fetchAllAlbums(searchQuery)
+        .then(({ data }) => {
+        const albums = data.albums
+        setAlbums(albums)
+        })
+      
+    } else {
+      setAlbums([])
+    }
   };
 
   return (

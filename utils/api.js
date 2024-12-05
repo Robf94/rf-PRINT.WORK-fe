@@ -5,6 +5,10 @@ const api = axios.create({
   timeout: 60000,
 });
 
+export function fetchAllAlbums() {
+  return api.get("/albums")
+}
+
 export function fetchAlbums(page = 1, limit = 10) {
   return api.get(`/albums/paginated?page=${page}&limit=${limit}`);
 }
