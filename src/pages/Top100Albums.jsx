@@ -1,54 +1,42 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
-import { fetchTop100Albums } from "../../utils/api";
+import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
-import Loader from "../components/Loader";
 import SearchBar from "../components/SearchBar";
 import normaliseString from "../../utils/normaliseString";
+import LoadMoreButton from "../components/LoadMoreButton";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(false);
-
-  // useInfiniteQuery({
-  //   queryKey: ["albums"],
-  //   queryFn: fetchTop100Albums,
-  //   initialPageParam: 1,
-  //   getNextPageParam: (lastPage, allPages) => {
-  //     if (allPages.length < 10) {
-  //       return allPages.length + 1;
-  //     } else {
-  //       return undefined;
-  //     }
-  //   },
-  // });
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
-    fetchTop100Albums()
-      .then(({ data }) => {
-        const albums = data.albums;
-        console.log(albums, "<<< albumsData");
-        setAlbums(albums);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsError(true);
-        console.log(err, "<<< error");
-      });
-  }, []);
+    const fetchAlbumData = () => {
+      setIsLoading(true);
+      setIsError(false);
+      fetchAlbums(page, 10)
+        .then(({data}) => {
+          if (data && data.albums) {
+            setAlbums((prevAlbums) => [...prevAlbums, ...data.albums]);
+            if (
+              data.albums.length < 10 ||
+              albums.length + data.albums.length >= 100
+            ) {
+              setHasMore(false);
+            }
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsError(true);
+        });
+    };
 
-  // if (isError) {
-  //   return <ErrorPage />
-  // }
-
-  if (isLoading) {
-    return <Loader />;
-  }
+    fetchAlbumData();
+  }, [page]);
 
   const filteredAlbums = albums.filter((album) => {
     if (searchInput.trim() === "") {
@@ -63,6 +51,15 @@ function AlbumsPage() {
     );
   });
 
+  const loadMore = () => {
+    if (hasMore && !isLoading) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  if (isError) {
+    return <p className="text-center">No albums found!</p>;
+  }
   return (
     <>
       <div className="album-search-container bg-primary py-5">
@@ -74,21 +71,26 @@ function AlbumsPage() {
         />
       </div>
       <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
-        {filteredAlbums.length === 0 ? (
-          <p className="text-center">No albums found!</p>
-        ) : (
-          filteredAlbums.map((album, index) => (
-            <AlbumCard
-              key={album.id}
-              position={index + 1}
-              albumId={album.id}
-              album={album.name}
-              artist={album.artistName}
-              artwork={album.artworkUrl100}
-            />
-          ))
-        )}
+        {filteredAlbums.map((album, index) => (
+          <AlbumCard
+            key={album.id}
+            position={index + 1}
+            albumId={album.id}
+            album={album.name}
+            artist={album.artistName}
+            artwork={album.artworkUrl100}
+          />
+        ))}
       </div>
+      {hasMore && (
+        <div className="text-center my-2">
+          <LoadMoreButton
+            onClick={loadMore}
+            disabled={isLoading}
+            btnText={isLoading ? "Loading..." : "Load More"}
+          ></LoadMoreButton>
+        </div>
+      )}
     </>
   );
 }

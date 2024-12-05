@@ -22,7 +22,7 @@ function Coverflow() {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    
+
     const favouriteAlbumsPromises = user.favouriteAlbums.map((id) => fetchAlbumById(id));
 
     Promise.all(favouriteAlbumsPromises)
@@ -50,34 +50,38 @@ function Coverflow() {
 
   /* Change background colour? */
   return (
-    <Swiper
-      effect={"coverflow"}
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView={"auto"}
-      coverflowEffect={{
-        rotate: 35,
-        stretch: 0,
-        depth: 50,
-        modifier: 1,
-        slideShadows: true,
-      }}
-      mousewheel={{
-        enabled: true,
-        sensitivity: 4,
-      }}
-      modules={[EffectCoverflow, Mousewheel]}
-      className="mySwiper"
-    >
-      {albums.map((album) => (
-        <SwiperSlide key={album.id}>
-          <div className="flex flex-col items-center h-full">
-            <img src={album.artworkUrl100} />
-            <p className="text-center">{album.name}</p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      <p className="text-center">Browse your favourite albums:</p>
+
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 35,
+          stretch: 0,
+          depth: 50,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        mousewheel={{
+          enabled: true,
+          sensitivity: 4,
+        }}
+        modules={[EffectCoverflow, Mousewheel]}
+        className="mySwiper"
+      >
+        {albums.map((album) => (
+          <SwiperSlide key={album.id}>
+            <div className="flex flex-col items-center h-full">
+              <img src={album.artworkUrl100} />
+              <p className="text-center">{album.name}</p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
   );
 }
 
