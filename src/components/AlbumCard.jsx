@@ -14,7 +14,7 @@ function AlbumCard(props) {
         </div>
 
         <div className="text-wrapper flex-1 mx-5 my-2 overflow-scroll">
-          <h3 className="text-h4 line-clamp-2">{album}</h3>
+          <h3 className="text-h4 line-clamp-2 font-bold">{album}</h3>
           <p className="truncate">{artist}</p>
         </div>
 

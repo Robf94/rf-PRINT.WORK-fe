@@ -14,7 +14,7 @@ import { EffectCoverflow, Mousewheel } from "swiper/modules";
 import Loader from "./Loader";
 
 function Coverflow() {
-  const user = useUser();
+  const { user } = useUser();
   const [albums, setAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -22,14 +22,13 @@ function Coverflow() {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-
-    // What happens when album falls out of top 100?
-
+    
     const favouriteAlbumsPromises = user.favouriteAlbums.map((id) => fetchAlbumById(id));
 
     Promise.all(favouriteAlbumsPromises)
-      .then((albums) => {
-        const modifiedAlbums = albums.map((data) => {
+      .then((albumsData) => {
+        const validAlbums = albumsData.filter((album) => album);
+        const modifiedAlbums = validAlbums.map((data) => {
           const album = data.album;
           return {
             ...album,
@@ -49,7 +48,7 @@ function Coverflow() {
     return <Loader />;
   }
 
-  /* Change background colour */
+  /* Change background colour? */
   return (
     <Swiper
       effect={"coverflow"}
