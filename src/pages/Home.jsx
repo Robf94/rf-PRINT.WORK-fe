@@ -11,9 +11,8 @@ function Home() {
   const [albums, setAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
 
-  const user = useUser();
+  const { user } = useUser();
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,7 +20,6 @@ function Home() {
     fetchTop10Albums()
       .then(({ data }) => {
         const albums = data.albums;
-        console.log(albums, "<<< albumsData");
         setAlbums(albums);
         setIsLoading(false);
       })
@@ -34,10 +32,12 @@ function Home() {
   return (
     <>
       <div className="text-wrapper mx-2">
-        <h1 className="text-h1">{greeting()}, {user.name}!</h1>
+        <h1 className="text-h1">
+          {greeting()}, {user.name}!
+        </h1>
         <p>Browse your favourite albums:</p>
       </div>
-        <Coverflow />
+      <Coverflow />
       <h1 className="text-h2 text-center">Today's Top 10 Albums</h1>
       <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
         {albums.length === 0 ? (
