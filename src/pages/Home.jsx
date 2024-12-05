@@ -36,7 +36,7 @@ function Home() {
         <h1 className="text-h1">Welcome back, {user.name}!</h1>
         <p>Browse your favourite albums:</p>
       </div>
-      <Coverflow />
+        <Coverflow />
       <h1 className="text-h2 text-center">Today's Top 10 Albums</h1>
       <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
         {albums.length === 0 ? (
