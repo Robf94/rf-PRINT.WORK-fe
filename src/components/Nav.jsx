@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <header className="sticky top-0">
-      <nav className="navbar bg-neutral shadow-md nav md:px-48 xl:px-96">
+      <nav className="navbar bg-neutral shadow-md nav lg:px-44 2xl:px-96">
         <div className="dropdown flex-1">
           <div
             tabIndex={0}
@@ -30,22 +30,36 @@ function Nav() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Albums</a>
+              <Link to={"/"}>Home</Link>
             </li>
             <li>
-              <a>Profile</a>
+              <Link to={"/albums"}>Albums</Link>
             </li>
           </ul>
         </div>
-        <div className="flex justify-center items-center">
-          <Link
-            className="btn btn-ghost rounded-full text-xl"
-            id="nav-heading"
-            to="/"
-          >
-            Nav
-          </Link>
-        </div>
+
+        <Link
+          className="rounded-full flex justify-center items-center p-1"
+          id="nav-heading"
+          to="/"
+        >
+          <img
+            src="/itunes.png"
+            alt="Apple Music Logo"
+            className="h-7"
+          />
+          <img
+            src="/x.svg"
+            alt=""
+            className="w-5 mx-2"
+          />
+          <img
+            src="/rob-codes-header-level.png"
+            alt="Apple Music Logo"
+            className="h-4 w-auto"
+          />
+        </Link>
+
         <div className="flex flex-1 items-center justify-end">
           <label className="swap swap-rotate">
             <input
