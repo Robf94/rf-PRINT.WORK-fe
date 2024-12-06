@@ -10,7 +10,7 @@ export function UserProvider({ children }) {
   const baseUser = {
     id: 1,
     name: "Joe Bloggs",
-    favouriteAlbums: [111153953, 1743036652, 1772364192, 1664429596, 1439640317],
+    favouriteAlbums: [1743036652, 1772364192, 1664429596, 1439640317],
   };
 
   const [user, setUser] = useState(() => {

@@ -6,24 +6,32 @@ import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import greeting from "../../utils/greeting";
 import ErrorPage from "./ErrorPage";
+import Loader from "../components/Loader";
 
 function Home() {
   const [albums, setAlbums] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
 
   const { user } = useUser();
 
   useEffect(() => {
     setIsError(false);
+    setIsLoading(true)
     fetchAlbums()
       .then(({ data }) => {
         const albums = data.albums;
         setAlbums(albums);
+        setIsLoading(false)
       })
       .catch((err) => {
         setIsError(true);
       });
   }, []);
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   if (isError) {
     return <ErrorPage />

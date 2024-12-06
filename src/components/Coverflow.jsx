@@ -43,14 +43,31 @@ function Coverflow() {
       .catch((err) => {
         setIsError(true);
       });
-  }, []);
+  }, [user.favouriteAlbums]);
 
   if (isLoading) {
-    return <Loader />;
+    return <p className="text-center m-5">Loading Coverflow...</p>;
   }
 
   if (isError) {
     return <ErrorPage />;
+  }
+
+  if (albums.length === 0) {
+    return (
+      <div className="bg-base-200 p-5">
+        <p className="text-center mb-5">
+          You currently have no albums in your favourites that are part of the top 100.
+        </p>
+        <p className="text-center mb-5">
+          To add one, navigate to an album and press the heart button.
+        </p>
+        <p className="text-center">
+          Albums will display as a coverflow. Albums that fall out of the top 100 will disappear
+          from this list.
+        </p>
+      </div>
+    );
   }
 
   return (
