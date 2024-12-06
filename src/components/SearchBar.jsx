@@ -6,22 +6,20 @@ function SearchBar(props) {
   const handleChange = (e) => {
     e.preventDefault();
     const searchQuery = e.target.value;
-    setSearchInput(searchQuery)
+    setSearchInput(searchQuery);
 
     if (searchQuery.length > 0) {
-      fetchAllAlbums(searchQuery)
-        .then(({ data }) => {
-        const albums = data.albums
-        setAlbums(albums)
-        })
-      
+      fetchAllAlbums(searchQuery).then(({ data }) => {
+        const albums = data.albums;
+        setAlbums(albums);
+      });
     } else {
-      setAlbums([])
+      setAlbums([]);
     }
   };
 
   return (
-    <label className="input input-bordered flex items-center m-2 rounded-full">
+    <label className="input input-bordered flex items-center md:mt-10 sm:mx-auto rounded-full max-w-lg w-full">
       <input
         type="text"
         className="grow"

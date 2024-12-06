@@ -4,7 +4,7 @@ function AlbumCard(props) {
   const { position, albumId, album, artist, artwork } = props;
 
   return (
-    <article className="card bg-neutral shadow-xl overflow-hidden">
+    <article className="card bg-neutral shadow-xl overflow-hidden hover:bg-base-200 transition ease duration-50 album-card">
       <Link
         to={`/albums/${albumId}`}
         className="flex flex-row justify-between items-center"

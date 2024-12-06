@@ -23,8 +23,14 @@ export default {
           neutral: "#ffffff",
           "base-100": "#eeece9",
         },
+        darkTheme: {
+          primary: "#2c2f36", // Dark charcoal, almost black, for strong emphasis
+          secondary: "#a176ad", // Soft purple adds sophistication
+          accent: "#ffc857", // Gentle amber for attention-grabbing elements
+          neutral: "#232323", // Very dark grey background
+          "base-100": "#383838", // Lighter grey for panels/cards
+        },
       },
-      "sunset",
     ],
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

@@ -7,8 +7,8 @@ function StandardButton(props) {
       to={link}
       className="flex justify-center"
     >
-      <button className="btn rounded-full mb-2 bg-secondary text-white border-none">
-        <Link to={link}>{btnText}</Link>
+      <button className="btn rounded mb-2 md:my-10 bg-secondary text-white border-none">
+        {btnText}
       </button>
     </Link>
   );

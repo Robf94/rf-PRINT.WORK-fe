@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import SearchBar from "../components/SearchBar";
-import normaliseString from "../../utils/normaliseString";
 import LoadMoreButton from "../components/LoadMoreButton";
 
 function AlbumsPage() {
@@ -14,79 +13,64 @@ function AlbumsPage() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (searchInput.trim() === "") {
-      setAlbums([]);
-      setPage(1);
-      setHasMore(true);
-    }
-  }, [searchInput]);
+    if (searchInput.length !== 0) return;
 
-  useEffect(() => {
-    const fetchAlbumData = () => {
-      setIsLoading(true);
-      setIsError(false);
-      fetchAlbums(page, 10)
-        .then(({ data }) => {
-          if (data && data.albums) {
-            setAlbums((prevAlbums) => [...prevAlbums, ...data.albums]);
-            if (data.albums.length < 10 || albums.length + data.albums.length >= 100) {
-              setHasMore(false);
-            }
-          }
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsError(true);
-        });
-    };
+    setIsLoading(true);
+    setIsError(false);
 
-    fetchAlbumData();
+    fetchAlbums(page, 20)
+      .then(({ data }) => {
+        if (data && data.albums) {
+          setAlbums((prev) => [...prev, ...data.albums]);
+          setHasMore(data.next ? true : false);
+        } else {
+          setHasMore(false);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsError(true);
+      });
   }, [page, searchInput]);
 
-  const filteredAlbums = albums.filter((album) => {
-    if (searchInput.trim() === "") {
-      return true;
-    }
-
-    const lowerCaseInput = searchInput.toLowerCase();
-
-    return (
-      normaliseString(album.name).includes(lowerCaseInput) ||
-      normaliseString(album.artistName).includes(lowerCaseInput)
-    );
-  });
-
   const loadMore = () => {
-    if (hasMore && !isLoading) {
-      setPage((prevPage) => prevPage + 1);
-    }
+    if (hasMore && !isLoading) setPage((prev) => prev + 1);
   };
 
   if (isError) {
     return <p className="text-center">No albums found!</p>;
   }
+
   return (
     <>
-      <div className="album-search-container bg-primary py-5">
+      <div className="album-search-container bg-primary px-2 py-5 md:py-10 lg:px-44 2xl:px-96 flex flex-col justify-center items-center">
         <h1 className="text-h1 text-center text-white">iTunes Top 100 Albums</h1>
-        <h2 className="text-h2 text-center text-white">Updated daily</h2>
+        <h2 className="text-h2 text-center text-white">Updated periodically</h2>
         <SearchBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           setAlbums={setAlbums}
         />
       </div>
-      <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
-        {filteredAlbums.map((album, index) => (
-          <AlbumCard
-            key={album.id}
-            position={index + 1}
-            albumId={album.id}
-            album={album.name}
-            artist={album.artistName}
-            artwork={album.artworkUrl100}
-          />
-        ))}
+      <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
+        {albums
+          .filter((album) => {
+            return (
+              searchInput.length === 0 ||
+              album.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+              album.artistName.toLowerCase().includes(searchInput.toLowerCase())
+            );
+          })
+          .map((album, index) => (
+            <AlbumCard
+              key={index}
+              position={index + 1}
+              albumId={album.id}
+              album={album.name}
+              artist={album.artistName}
+              artwork={album.artworkUrl100}
+            />
+          ))}
       </div>
       {hasMore && searchInput.length === 0 && (
         <div className="text-center my-2">

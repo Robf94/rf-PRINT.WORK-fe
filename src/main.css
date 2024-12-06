@@ -9,3 +9,11 @@ body {
 header {
   z-index: 999;
 }
+
+.album-card:hover {
+  transform: scale(1.01);
+}
+
+.album-card:active {
+  transform: scale(0.99)
+}

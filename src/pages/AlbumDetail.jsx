@@ -14,8 +14,8 @@ function AlbumDetail() {
   const [isError, setIsError] = useState(false);
   const { id } = useParams();
 
-  const { user, toggleFavouriteAlbum } = useUser()
-  const isFavourite = user.favouriteAlbums.includes(parseInt(album.id))
+  const { user, toggleFavouriteAlbum } = useUser();
+  const isFavourite = user.favouriteAlbums.includes(parseInt(album.id));
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,64 +34,61 @@ function AlbumDetail() {
       .catch((err) => {
         setIsError(true);
       });
-  }, []);
+  }, [id]);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  // if (isError) {
-  //   return <ErrorPage />
-  // }
-
   return (
-    <>
-      <img
-        src={album.artworkUrl100}
-        alt={`Album artwork for ${album.name}`}
-        className="w-sm-full"
-      />
-      <section className="m-2 p-3 card bg-neutral shadow-xl overflow-hidden">
-        <h1 className="text-h1 font-bold">{album.name}</h1>
-        <h2 className="text-h2">{album.artistName}</h2>
-        <p className="mb-5">Released: {dateFormat(album.releaseDate, "mmmm d, yyyy")}</p>
-        <div>
-          <HeartButton
-            albumId={album.id}
-            isActive={isFavourite}
-            toggleFavourite={toggleFavouriteAlbum}
-          />
+    <div className="album-detail-container flex flex-col md:flex-row justify-center items-center md:h-screen p-5 gap-5 md:gap-10">
+      <div className="album-artwork-container md:w-[450px] md:h-[450px]">
+        <img
+          src={album.artworkUrl100}
+          alt={`Album artwork for ${album.name}`}
+          className="rounded-lg w-full md:w-[450px] h-full md:h-[450px]"
+        />
+      </div>
+      <section className="album-card-container w-full md:w-[450px] md:h-[450px] p-5 card bg-neutral shadow-xl rounded-lg flex flex-col justify-between">
+        <div className="container mb-10">
+          <h1 className="text-h1 font-bold">{album.name}</h1>
+          <h2 className="text-h2">{album.artistName}</h2>
+          <p className="mb-2">Released: {dateFormat(album.releaseDate, "dd mmmm yyyy")}</p>
+          <div className="genres flex items-start gap-2">
+            {album.genres.map((genre) =>
+              genre.name !== "Music" ? (
+                <span
+                  key={genre.name}
+                  className="badge-accent rounded p-1"
+                >
+                  {genre.name}
+                </span>
+              ) : null
+            )}
+          </div>
         </div>
-        <div className="btn-container flex gap-2 mb-5 justify-between">
-          {album.artistName !== "Various Artists" ? (
+
+        <div className="btn-container flex gap-2 justify-between items-center">
+          {album.artistName !== "Various Artists" && (
             <ExternalButton
               url={album.artistUrl}
-              btnText={"View Artist on Apple Music"}
+              btnText={"View Artist"}
             />
-          ) : undefined}
-
+          )}
           <ExternalButton
             url={album.url}
-            btnText={"View Album on Apple Music"}
+            btnText={"View Album"}
           />
-        </div>
-        <div className="genres">
-          <h3 className="text-h3">Genres:</h3>
-          {album.genres.map((genre) =>
-            genre.name !== "Music" ? (
-              <span
-                key={genre.id}
-                className="badge-success rounded p-1"
-              >
-                {genre.name}
-              </span>
-            ) : (
-              ""
-            )
-          )}
+          <div className="flex h-full w-10 self-center">
+            <HeartButton
+              albumId={album.id}
+              isActive={isFavourite}
+              toggleFavourite={toggleFavouriteAlbum}
+            />
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
