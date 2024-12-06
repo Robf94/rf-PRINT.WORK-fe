@@ -27,14 +27,12 @@ function Home() {
 
   return (
     <>
-      <div className="text-wrapper mx-2">
-        <h1 className="text-h1 text-center mb-10">
-          {greeting()}, {user.name}!
-        </h1>
-      </div>
+      <h1 className="text-h1 text-center px-2 py-10 md:pt-10 bg-base-200">
+        {greeting()}, {user.name}!
+      </h1>
       <Coverflow />
-      <h1 className="text-h2 mt-10 text-center">Today's Top 10 Albums</h1>
-      <div className="card-container flex flex-col gap-2 m-2 max-w-lg">
+      <h1 className="text-h2 mt-10 md:my-10 text-center">Current Top {albums.length} Albums</h1>
+      <div className="grid md:grid-cols-2 gap-2 my-2 mx-2 lg:mx-44 2xl:mx-96">
         {albums.length === 0 ? (
           <p className="text-center">No albums found!</p>
         ) : (
@@ -50,10 +48,12 @@ function Home() {
           ))
         )}
       </div>
-      <StandardButton
-        link={"/albums"}
-        btnText={"View Top 100 Albums"}
-      />
+      <div className="flex justify-center">
+        <StandardButton
+          link={"/albums"}
+          btnText={"View Top 100 Albums"}
+        />
+      </div>
     </>
   );
 }

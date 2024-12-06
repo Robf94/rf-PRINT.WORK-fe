@@ -9,7 +9,7 @@ export function fetchAllAlbums() {
   return api.get("/albums")
 }
 
-export function fetchAlbums(page = 1, limit = 10) {
+export function fetchAlbums(page = 1, limit = 20) {
   return api.get(`/albums/paginated?page=${page}&limit=${limit}`);
 }
 

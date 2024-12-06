@@ -1,8 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useUser } from "../context/UserContext";
 import { fetchAlbumById } from "../../utils/api";
 import getLargerArtwork from "../../utils/getLargerArtwork";
+import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -50,7 +51,7 @@ function Coverflow() {
 
   /* Change background colour? */
   return (
-    <>
+    <div className="bg-base-200">
       <p className="text-center">Browse your favourite albums:</p>
 
       <Swiper
@@ -60,28 +61,32 @@ function Coverflow() {
         slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 35,
-          stretch: 0,
+          stretch: 1,
           depth: 50,
           modifier: 1,
           slideShadows: true,
         }}
         mousewheel={{
           enabled: true,
-          sensitivity: 4,
         }}
         modules={[EffectCoverflow, Mousewheel]}
         className="mySwiper"
       >
         {albums.map((album) => (
           <SwiperSlide key={album.id}>
-            <div className="flex flex-col items-center h-full">
-              <img src={album.artworkUrl100} />
-              <p className="text-center">{album.name}</p>
-            </div>
+            <Link to={`/albums/${album.id}`}>
+              <div className="flex flex-col items-center h-full">
+                <img
+                  src={album.artworkUrl100}
+                  className="rounded"
+                />
+                <p className="text-center">{album.name}</p>
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }
 

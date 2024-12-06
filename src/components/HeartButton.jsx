@@ -8,9 +8,7 @@ function HeartButton(props) {
       isActive={isActive}
       onClick={() => toggleFavourite(parseInt(albumId))}
       animationTrigger="both"
-      inactiveColor="rgba(255,125,125,.75)"
-      activeColor="#e019ae"
-      animationDuration={0.1}
+      animationDuration={0.5}
     />
   );
 }

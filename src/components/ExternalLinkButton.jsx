@@ -1,7 +1,7 @@
 function ExternalButton(props) {
   const { url, btnText } = props;
   return (
-    <button className="btn rounded-full bg-secondary flex-1 border-none">
+    <button className="btn rounded bg-secondary flex-1 border-none">
       <a
         href={url}
         target="blank"
