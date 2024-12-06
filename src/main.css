@@ -19,6 +19,9 @@ header {
 }
 
 @media screen and (min-width: 768px) {
+  .album-detail-container {
+    box-shadow: 0px -148px 86px -117px rgba(0,0,0,0.45) inset;
+  }
   .album-artwork-container,
   .album-card-container {
     aspect-ratio: 1/1;
