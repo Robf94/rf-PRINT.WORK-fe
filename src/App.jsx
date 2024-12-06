@@ -8,23 +8,22 @@ import ScrollToTop from "../utils/ScrollToTop";
 function App() {
   return (
     <>
-
       <Nav />
       <ScrollToTop />
-        <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/albums"
-            element={<AlbumsPage />}
-          />
-          <Route
-            path="/albums/:id"
-            element={<AlbumDetail />}
-          />
-        </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/albums"
+          element={<AlbumsPage />}
+        />
+        <Route
+          path="/albums/:id"
+          element={<AlbumDetail />}
+        />
+      </Routes>
     </>
   );
 }

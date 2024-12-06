@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Nav() {
+  const [theme, setTheme] = useState(() => {
+    const initialTheme = localStorage.getItem("theme");
+    return initialTheme ? initialTheme : "lightTheme";
+  });
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "lightTheme" ? "darkTheme" : "lightTheme";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <header className="sticky top-0">
       <nav className="navbar bg-neutral shadow-md nav lg:px-44 2xl:px-96">
@@ -66,6 +84,7 @@ function Nav() {
               type="checkbox"
               className="theme-controller"
               value="darkTheme"
+              onClick={toggleTheme}
             />
 
             <svg
