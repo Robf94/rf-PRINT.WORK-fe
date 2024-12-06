@@ -85,6 +85,7 @@ function Nav() {
               className="theme-controller"
               value="darkTheme"
               onClick={toggleTheme}
+              checked={theme === "darkTheme"}
             />
 
             <svg
