@@ -42,14 +42,14 @@ function AlbumDetail() {
 
   return (
     <div className="album-detail-container flex flex-col md:flex-row justify-center items-center md:h-screen p-5 gap-5 md:gap-10">
-      <div className="album-artwork-container md:w-[450px] md:h-[450px]">
+      <div className="album-artwork-container w-full md:w-1/2 md:max-w-[450px]">
         <img
           src={album.artworkUrl100}
           alt={`Album artwork for ${album.name}`}
-          className="rounded-lg w-full md:w-[450px] h-full md:h-[450px]"
+          className="w-full md:max-w-[450px] h-full rounded-lg object-cover"
         />
       </div>
-      <section className="album-card-container w-full md:w-[450px] md:h-[450px] p-5 card bg-neutral shadow-xl rounded-lg flex flex-col justify-between">
+      <section className="album-card-container w-full md:w-1/2 md:max-w-[450px] p-5 md:p-10 lg:p-16 card bg-neutral shadow-xl rounded-lg flex flex-col justify-between">
         <div className="container mb-10">
           <h1 className="text-h1 font-bold">{album.name}</h1>
           <h2 className="text-h2">{album.artistName}</h2>
