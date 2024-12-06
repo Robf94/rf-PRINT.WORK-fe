@@ -7,6 +7,5 @@ function keepAlive() {
 
 cron.schedule("*/2 * * * *", () => {
   console.log("running a task every two minutes");
-  keepAlive()
-  console.log(2+2);
+  keepAlive();
 });

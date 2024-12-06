@@ -5,6 +5,7 @@ import { useUser } from "../context/UserContext";
 import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import greeting from "../../utils/greeting";
+import ErrorPage from "./ErrorPage";
 
 function Home() {
   const [albums, setAlbums] = useState([]);
@@ -21,9 +22,12 @@ function Home() {
       })
       .catch((err) => {
         setIsError(true);
-        console.log(err, "<<< error");
       });
   }, []);
+
+  if (isError) {
+    return <ErrorPage />
+  }
 
   return (
     <>

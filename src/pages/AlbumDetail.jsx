@@ -7,6 +7,7 @@ import getLargerArtwork from "../../utils/getLargerArtwork";
 import ExternalButton from "../components/ExternalLinkButton";
 import { useUser } from "../context/UserContext";
 import HeartButton from "../components/HeartButton";
+import ErrorPage from "./ErrorPage";
 
 function AlbumDetail() {
   const [album, setAlbum] = useState({});
@@ -38,6 +39,10 @@ function AlbumDetail() {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (isError) {
+    return <ErrorPage />;
   }
 
   return (

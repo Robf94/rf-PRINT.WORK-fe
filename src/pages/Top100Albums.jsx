@@ -52,17 +52,6 @@ function AlbumsPage() {
           setAlbums={setAlbums}
         />
       </div>
-      {/* <details className="dropdown">
-        <summary className="btn m-1">Genres</summary>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-          {albums.map((album) => {
-            const genreArray = [];
-            return album.genres.map((genre) => {
-              return genre.name;
-            });
-          })}
-        </ul>
-      </details> */}
       <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
         {albums
           .filter((album) => {

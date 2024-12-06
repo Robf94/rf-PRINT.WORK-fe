@@ -9,10 +9,11 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-import "../coverflow-styling.css";
+import "../styles/coverflow-styling.css";
 
 import { EffectCoverflow, Mousewheel } from "swiper/modules";
 import Loader from "./Loader";
+import ErrorPage from "../pages/ErrorPage";
 
 function Coverflow() {
   const { user } = useUser();
@@ -40,7 +41,6 @@ function Coverflow() {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setIsError(true);
       });
   }, []);
@@ -49,7 +49,10 @@ function Coverflow() {
     return <Loader />;
   }
 
-  /* Change background colour? */
+  if (isError) {
+    return <ErrorPage />;
+  }
+
   return (
     <div className="bg-base-200">
       <p className="text-center">Browse your favourite albums:</p>
