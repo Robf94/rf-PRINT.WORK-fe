@@ -10,17 +10,29 @@ export function UserProvider({ children }) {
   const baseUser = {
     id: 1,
     name: "Joe Bloggs",
-    favouriteAlbums: [1743036652, 1772364192, 1664429596, 1439640317],
+    favouriteAlbums: [
+      663097964, 1762652806, 1743036652, 1772364192, 1664429596, 1439640317, 111153953,
+    ],
+    // I have added some valid but not currently in top 100 album ids above, which *should* not be displayed, nor throw any errors when coverflow is loaded
   };
 
   const [user, setUser] = useState(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    return storedUser || baseUser;
+    return storedUser ? storedUser : baseUser;
   });
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   }, [user]);
+
+  const setFavouriteAlbums = (updatedFavourites) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      favouriteAlbums: updatedFavourites,
+    }));
+  };
 
   const toggleFavouriteAlbum = (albumId) => {
     setUser((prevUser) => {
@@ -34,6 +46,8 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, toggleFavouriteAlbum }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, toggleFavouriteAlbum, setFavouriteAlbums }}>
+      {children}
+    </UserContext.Provider>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useUser } from "../context/UserContext";
-import { fetchAlbumById } from "../../utils/api";
+import { fetchAlbumById, fetchAllAlbums } from "../../utils/api";
 import getLargerArtwork from "../../utils/getLargerArtwork";
 import { Link } from "react-router-dom";
 
@@ -12,20 +12,29 @@ import "swiper/css/pagination";
 import "../styles/coverflow-styling.css";
 
 import { EffectCoverflow, Mousewheel } from "swiper/modules";
-import Loader from "./Loader";
 import ErrorPage from "../pages/ErrorPage";
 
 function Coverflow() {
   const { user } = useUser();
   const [albums, setAlbums] = useState([]);
+  const [top100Ids, setTop100Ids] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    fetchAllAlbums().then(({ data }) => {
+      const ids = data.albums.map((album) => parseInt(album.id));
+      setTop100Ids(ids);
+    });
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
 
-    const favouriteAlbumsPromises = user.favouriteAlbums.map((id) => fetchAlbumById(id));
+    const validFavouriteAlbumIds = user.favouriteAlbums.filter((id) => top100Ids.includes(id));
+
+    const favouriteAlbumsPromises = validFavouriteAlbumIds.map((id) => fetchAlbumById(id));
 
     Promise.all(favouriteAlbumsPromises)
       .then((albumsData) => {
@@ -43,7 +52,7 @@ function Coverflow() {
       .catch((err) => {
         setIsError(true);
       });
-  }, [user.favouriteAlbums]);
+  }, [user.favouriteAlbums, top100Ids]);
 
   if (isLoading) {
     return <p className="text-center m-5">Loading Coverflow...</p>;
