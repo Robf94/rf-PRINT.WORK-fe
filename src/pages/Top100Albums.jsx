@@ -3,6 +3,8 @@ import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import SearchBar from "../components/SearchBar";
 import LoadMoreButton from "../components/LoadMoreButton";
+import { Link } from "react-router-dom";
+import BrowseCountries from "./AroundTheWorld";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
@@ -51,6 +53,7 @@ function AlbumsPage() {
           setSearchInput={setSearchInput}
           setAlbums={setAlbums}
         />
+        <Link to={`/albums/aroundtheworld`}>Feeling adventurous? Check out the top 100 albums from around the world</Link>
       </div>
       <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
         {albums
@@ -78,7 +81,7 @@ function AlbumsPage() {
             onClick={loadMore}
             disabled={isLoading}
             btnText={isLoading ? "Loading..." : "Load More"}
-          ></LoadMoreButton>
+          />
         </div>
       )}
     </>

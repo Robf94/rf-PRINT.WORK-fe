@@ -4,6 +4,7 @@ import AlbumsPage from "./pages/Top100Albums";
 import AlbumDetail from "./pages/AlbumDetail";
 import Nav from "./components/Nav";
 import ScrollToTop from "../utils/ScrollToTop";
+import BrowseCountries from "./pages/AroundTheWorld";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="/albums/:id"
           element={<AlbumDetail />}
+        />
+        <Route
+          path="/albums/aroundtheworld"
+          element={<BrowseCountries />}
         />
       </Routes>
     </>
