@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 export function fetchAllAlbums(countryCode = "gb") {
-  return api.get("/albums?countryCode=${countryCode}")
+  return api.get(`/albums?countryCode=${countryCode}`)
 }
 
 export function fetchAlbums(page = 1, limit = 20) {
