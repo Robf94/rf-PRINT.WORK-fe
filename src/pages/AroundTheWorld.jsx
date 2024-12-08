@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchAllAlbums } from "../../utils/api";
 import CountrySelector from "../components/CountrySelector";
+import Loader from "../components/Loader";
 
 function BrowseCountries() {
   const [countryCode, setCountryCode] = useState("gb");
@@ -12,7 +13,6 @@ function BrowseCountries() {
     setIsLoading(true);
     fetchAllAlbums(countryCode)
       .then(({ data }) => {
-        console.log(data.albums[0].name);
         setAlbums(data.albums);
         setIsLoading(false);
       })
@@ -24,7 +24,6 @@ function BrowseCountries() {
 
   const handleCountryChange = (e) => {
     const selectedCountry = e.target.value;
-    console.log("selected:", selectedCountry);
     setCountryCode(selectedCountry);
   };
 
@@ -38,11 +37,11 @@ function BrowseCountries() {
         />
       </div>
       {isLoading ? (
-        <p className="text-center m-5">Loading...</p>
+        <Loader />
       ) : (
-        <div class="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
+        <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
           {albums.map((album, index) => (
-            <article className="card bg-neutral shadow-xl overflow-hidden">
+            <article key={index} className="card bg-neutral shadow-xl overflow-hidden">
               <div className="flex flex-row justify-between items-center">
                 <div className="flex items-center justify-center w-10 h-10 ml-5 rounded-full grow-0 shrink-0 album-card-digit bg-primary">
                   <h3 className="text-white">{index + 1}</h3>
