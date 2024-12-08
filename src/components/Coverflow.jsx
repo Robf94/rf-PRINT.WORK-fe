@@ -33,7 +33,6 @@ function Coverflow() {
     setIsError(false);
 
     const validFavouriteAlbumIds = user.favouriteAlbums.filter((id) => top100Ids.includes(id));
-
     const favouriteAlbumsPromises = validFavouriteAlbumIds.map((id) => fetchAlbumById(id));
 
     Promise.all(favouriteAlbumsPromises)
@@ -82,7 +81,6 @@ function Coverflow() {
   return (
     <div className="bg-base-200">
       <p className="text-center">Browse your favourite albums:</p>
-
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

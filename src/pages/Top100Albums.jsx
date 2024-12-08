@@ -4,7 +4,6 @@ import AlbumCard from "../components/AlbumCard";
 import SearchBar from "../components/SearchBar";
 import LoadMoreButton from "../components/LoadMoreButton";
 import { Link } from "react-router-dom";
-import BrowseCountries from "./AroundTheWorld";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
@@ -46,14 +45,22 @@ function AlbumsPage() {
   return (
     <>
       <div className="album-search-container bg-primary px-2 py-5 md:py-10 lg:px-44 2xl:px-96 flex flex-col justify-center items-center">
-        <h1 className="text-h1 text-center text-white">iTunes Top 100 Albums</h1>
-        <h2 className="text-h2 text-center text-white">Updated periodically</h2>
+        <h1 className="text-h1 text-center text-white">iTunes UK Top 100 Albums</h1>
+        <h2 className="text-h2 text-center text-white mb-2">Updated periodically</h2>
         <SearchBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           setAlbums={setAlbums}
         />
-        <Link to={`/albums/aroundtheworld`}>Feeling adventurous? Check out the top 100 albums from around the world</Link>
+        <p className="text-center text-white mt-5">
+          Feeling adventurous? Check out the top 100 albums from around the world{" "}
+          <Link
+            to={`/albums/aroundtheworld`}
+            className="text-center text-white font-bold underline"
+          >
+            here
+          </Link>
+        </p>
       </div>
       <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
         {albums

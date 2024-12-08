@@ -2,6 +2,7 @@ function CountrySelector(props) {
   const { selectedCountry, onCountryChange } = props;
   return (
     <select
+      className="select select-secondary w-full max-w-xs"
       id="country-selector"
       value={selectedCountry}
       onChange={onCountryChange}

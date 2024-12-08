@@ -43,7 +43,7 @@ function Home() {
         {greeting()}, {user.name}!
       </h1>
       <Coverflow />
-      <h1 className="text-h2 mt-10 md:my-10 text-center">Current Top {albums.length} Albums</h1>
+      <h1 className="text-h2 mt-10 md:my-10 text-center">Current UK Top {albums.length} Albums</h1>
       <div className="grid md:grid-cols-2 gap-2 my-2 mx-2 lg:mx-44 2xl:mx-96">
         {albums.length === 0 ? (
           <p className="text-center">No albums found!</p>
