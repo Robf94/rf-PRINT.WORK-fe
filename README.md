@@ -26,4 +26,4 @@ In the Nav, clicking the logo will take you to the homepage. There is a popup me
 
 This app is responsive, and works across devices of all screen widths. This was achieved mostly using Tailwind, with some minor custom CSS tweaks for more specific cases.
 
-Thanky you for taking the time to look at my project! :relaxed:
+Thank you for taking the time to look at my project! :relaxed:
