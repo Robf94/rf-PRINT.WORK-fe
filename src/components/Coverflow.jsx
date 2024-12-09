@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useUser } from "../context/UserContext";
-import { fetchAlbumById, fetchAllAlbums } from "../../utils/api";
-import getLargerArtwork from "../../utils/getLargerArtwork";
 import { Link } from "react-router-dom";
-
+import getLargerArtwork from "../../utils/getLargerArtwork";
+import { fetchAlbumById, fetchAllAlbums } from "../../utils/api";
+import { useUser } from "../context/UserContext";
+import ErrorPage from "../pages/ErrorPage";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
-import "../styles/coverflow-styling.css";
-
 import { EffectCoverflow, Mousewheel } from "swiper/modules";
-import ErrorPage from "../pages/ErrorPage";
+import "../styles/coverflow-styling.css";
 
 function Coverflow() {
   const { user } = useUser();
@@ -38,8 +35,7 @@ function Coverflow() {
 
     Promise.all(favouriteAlbumsPromises)
       .then((albumsData) => {
-        const validAlbums = albumsData.filter((album) => album);
-        const modifiedAlbums = validAlbums.map((data) => {
+        const modifiedAlbums = albumsData.map((data) => {
           const album = data.album;
           return {
             ...album,
