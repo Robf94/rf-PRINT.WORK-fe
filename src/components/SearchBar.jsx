@@ -1,5 +1,6 @@
 import { fetchAllAlbums } from "../../utils/api";
 
+
 function SearchBar(props) {
   const { searchInput, setSearchInput, setAlbums } = props;
 

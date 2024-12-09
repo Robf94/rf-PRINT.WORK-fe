@@ -3,6 +3,7 @@ import { fetchAlbums } from "../../utils/api";
 import AlbumCard from "../components/AlbumCard";
 import SearchBar from "../components/SearchBar";
 import LoadMoreButton from "../components/LoadMoreButton";
+import normaliseString from "../../utils/normaliseString";
 
 function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
@@ -55,10 +56,13 @@ function AlbumsPage() {
       <div className="grid md:grid-cols-2 gap-2 m-2 md:my-10 lg:mx-44 2xl:mx-96">
         {albums
           .filter((album) => {
+            const normalisedSearchQuery = normaliseString(searchInput);
+            const normalisedAlbumName = normaliseString(album.name);
+            const normalisedArtistName = normaliseString(album.artistName);
             return (
               searchInput.length === 0 ||
-              album.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-              album.artistName.toLowerCase().includes(searchInput.toLowerCase())
+              normalisedAlbumName.includes(normalisedSearchQuery) ||
+              normalisedArtistName.includes(normalisedSearchQuery)
             );
           })
           .map((album, index) => (
